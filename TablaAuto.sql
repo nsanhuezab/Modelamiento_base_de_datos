@@ -29,7 +29,7 @@ rename Clientes to cliente
 describe cliente
 rename cliente to clientes --cambiar nombre
 drop table arriendoautos --borrar
-alter table clientes modify appatcli varchar2(20) --editar tabla
+alter table clientes modify appatcli varchar2(20) --editar atributo
 alter table autos add color varchar2(15) --añadir atributos
 alter table autos rename column color to colorauto --renombrar atributos
 alter table autos drop column colorauto --eliminar atributos
