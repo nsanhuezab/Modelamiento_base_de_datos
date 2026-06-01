@@ -5,6 +5,7 @@ apPatCli varchar2(15),
 apMatCli varchar2(15),
 fonocli number(9)
 );
+DESCRIBE Clientes --muestra la estructura de la tabla
 Create table Autos(
 patente varchar2(6) not null primary key,
 marca varchar2(15),
