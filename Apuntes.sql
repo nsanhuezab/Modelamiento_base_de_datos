@@ -136,11 +136,37 @@ select  *  from user_constraints where table_name = 'REGISTRODENOTAS' --Para rev
 insert into registrodenotas values(125,'FR4545','20210656-3',5,6.3) --marcara error ya que no cumple condicion
 alter table registrodenotas drop constraint cknumeval --eliminar la restricción check 
 
+--Transacciones
+--Al ejecutar una transacción, si una de las operaciones falla se podrá deshacer la transacción entera.
+begin
+update productos set precio=5000 where codProd=110;
+delete from productos where nombreProd='Martillo';
 
+commit; --Confirma la ejecución de una transacción.
+exception when others then rollback; --es una reversión que permite deshacer una transacción.
+end;
 
+--Gropup By 
+/*Permite agrupar los datos de salida por uno o más campos, que están en la primera línea del select, 
+además se debe estar usando, al menos, una función grupal (sum, avg, min, max, count) en la primera línea del Select.*/ 
 
+select rutprofesor,sum(monto) SumaDePagos
+from pagosaprofesores
+where codigocurso='as3000'
+group by rutprofesor --Se agrupa por un campo que está en la 1ra línea del select (excepto el campo de la función grupal)
 
-
-
+--Having
+/*having permite definir condiciones de salida, similar al where, 
+pero usando las funciones grupales de registros (sum, avg, count, max, min).*/
+select rutprofesor, sum(monto)
+from pagosaprofesores
+group by rutprofesor
+having sum(monto)>=800000 
+--Se puede usar Having y where juntos
+select rutprofesor, avg(monto) promedio
+from pagosaprofesores
+where monto>80000
+group by rutprofesor
+having sum(monto)>=300000 
 
 
